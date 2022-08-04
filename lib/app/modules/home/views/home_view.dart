@@ -47,7 +47,7 @@ class HomeView extends GetView<HomeController> {
                                 borderRadius: BorderRadius.circular(8.0),
                                 image: DecorationImage(
                                   image: NetworkImage(
-                                      "http://slkbankum.com/profil.jpg"),
+                                      "http://anaknya.slkbankum.com/assets/final.png"),
                                   fit: BoxFit.cover,
                                 ),
                               ),
