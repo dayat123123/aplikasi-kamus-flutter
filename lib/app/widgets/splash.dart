@@ -24,7 +24,7 @@ class SplashScreen extends StatelessWidget {
                 borderRadius: BorderRadius.circular(8.0),
                 image: DecorationImage(
                   image: NetworkImage(
-                      "http://slkbankum.com/api_app/logo-splash.png"),
+                      "http://anaknya.slkbankum.com/assets/loggg.png"),
                   fit: BoxFit.cover,
                 ),
               ),
