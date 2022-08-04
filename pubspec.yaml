@@ -1,0 +1,26 @@
+name: kamus_banjar
+version: 1.0.0+1
+publish_to: none
+description: A new Flutter project.
+environment: 
+  sdk: '>=2.16.2 <3.0.0'
+
+dependencies: 
+  cupertino_icons: ^1.0.2
+  http: ^0.13.4
+  
+  get: 4.6.5
+  flutter: 
+    sdk: flutter
+  speech_to_text: ^5.6.0
+  highlight_text: ^1.4.0
+  avatar_glow: ^2.0.2
+
+dev_dependencies: 
+  flutter_lints: ^1.0.0
+  flutter_test: 
+    sdk: flutter
+
+flutter: 
+  uses-material-design: true
+
