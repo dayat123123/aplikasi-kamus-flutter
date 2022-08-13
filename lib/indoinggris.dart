@@ -26,6 +26,7 @@ class _IndoInggrisState extends State<IndoInggris> {
   String output = 'Initial Output';
   // untuk speech to text
   SpeechToText _speechToText = SpeechToText();
+  String terjemahan = '';
   bool _speechEnabled = false;
   String _lastWords = '';
   @override
@@ -37,6 +38,7 @@ class _IndoInggrisState extends State<IndoInggris> {
 
   void _initSpeech() async {
     _speechEnabled = await _speechToText.initialize();
+
     setState(() {});
   }
 
@@ -53,6 +55,9 @@ class _IndoInggrisState extends State<IndoInggris> {
   void _onSpeechResult(SpeechRecognitionResult result) {
     setState(() {
       _textEditingController.text = result.recognizedWords;
+      terjemahan = _textEditingController.text;
+      fetchdata(url =
+          'https://vnev.herokuapp.com/api2?query=' + terjemahan.toString());
     });
   }
   // batas
