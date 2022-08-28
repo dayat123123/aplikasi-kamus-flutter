@@ -56,7 +56,7 @@ class _IndoBanjarBetulState extends State<IndoBanjarBetul> {
       _textEditingController.text = result.recognizedWords;
       terjemahan = _textEditingController.text;
       fetchdata(url =
-          'https://vnev.herokuapp.com/api2?query=' + terjemahan.toString());
+          'https://vnev.herokuapp.com/api5?query=' + terjemahan.toString());
     });
   }
   // batas

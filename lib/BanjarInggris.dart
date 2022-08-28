@@ -56,7 +56,7 @@ class _BanjarInggrisState extends State<BanjarInggris> {
       _textEditingController.text = result.recognizedWords;
       terjemahan = _textEditingController.text;
       fetchdata(url =
-          'https://vnev.herokuapp.com/api2?query=' + terjemahan.toString());
+          'https://vnev.herokuapp.com/api7?query=' + terjemahan.toString());
     });
   }
   // batas
