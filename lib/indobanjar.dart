@@ -24,7 +24,7 @@ class _IndoBanjarState extends State<IndoBanjar> {
   String url = '';
   String terjemahan = '';
   var data;
-  String output = 'Initial Output';
+  String output = '';
   // untuk speech to text
   SpeechToText _speechToText = SpeechToText();
   bool _speechEnabled = false;
@@ -187,7 +187,7 @@ class _IndoBanjarState extends State<IndoBanjar> {
                 height: 15,
               ),
               Text(
-                "Terjemahan: $output",
+                "$output",
                 style: TextStyle(fontSize: 18),
               ),
             ],

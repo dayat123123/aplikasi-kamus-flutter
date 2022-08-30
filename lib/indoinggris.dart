@@ -23,7 +23,7 @@ class _IndoInggrisState extends State<IndoInggris> {
   late TextEditingController _textEditingController;
   String url = '';
   var data;
-  String output = 'Initial Output';
+  String output = '';
   // untuk speech to text
   SpeechToText _speechToText = SpeechToText();
   String terjemahan = '';
@@ -188,7 +188,7 @@ class _IndoInggrisState extends State<IndoInggris> {
                 height: 15,
               ),
               Text(
-                "Terjemahan: $output",
+                "$output",
                 style: TextStyle(fontSize: 18),
               ),
             ],

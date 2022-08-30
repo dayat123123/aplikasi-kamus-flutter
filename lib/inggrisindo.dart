@@ -24,7 +24,7 @@ class _InggrisIndoState extends State<InggrisIndo> {
   String url = '';
   String terjemahan = '';
   var data;
-  String output = 'Initial Output';
+  String output = '';
   // untuk speech to text
   SpeechToText _speechToText = SpeechToText();
   bool _speechEnabled = false;
@@ -187,7 +187,7 @@ class _InggrisIndoState extends State<InggrisIndo> {
                 height: 15,
               ),
               Text(
-                "Translate: $output",
+                "$output",
                 style: TextStyle(fontSize: 18),
               ),
             ],
