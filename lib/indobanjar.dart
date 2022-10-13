@@ -56,7 +56,7 @@ class _IndoBanjarState extends State<IndoBanjar> {
       _textEditingController.text = result.recognizedWords;
       terjemahan = _textEditingController.text;
       fetchdata(url =
-          'https://vnev.herokuapp.com/api4?query=' + terjemahan.toString());
+          'https://vnev.herokuapp.com/api8?query=' + terjemahan.toString());
     });
   }
   // batas
@@ -146,7 +146,7 @@ class _IndoBanjarState extends State<IndoBanjar> {
                   child: Form(
                     child: TextFormField(
                       onChanged: (value) {
-                        url = 'https://vnev.herokuapp.com/api4?query=' +
+                        url = 'https://vnev.herokuapp.com/api8?query=' +
                             value.toString();
                       },
                       controller: _textEditingController,
