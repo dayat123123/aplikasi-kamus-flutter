@@ -12,6 +12,8 @@ import 'package:kamus_banjar/function.dart';
 import 'package:speech_to_text/speech_recognition_result.dart';
 import 'package:speech_to_text/speech_to_text.dart';
 
+import 'app/modules/home/views/home_view.dart';
+
 class IndoBanjarBetul extends StatefulWidget {
   const IndoBanjarBetul({Key? key}) : super(key: key);
 
@@ -52,11 +54,15 @@ class _IndoBanjarBetulState extends State<IndoBanjarBetul> {
   }
 
   void _onSpeechResult(SpeechRecognitionResult result) {
-    setState(() {
+    setState(() async {
       _textEditingController.text = result.recognizedWords;
       terjemahan = _textEditingController.text;
-      fetchdata(url =
+      data = await fetchdata(url =
           'https://vnev.herokuapp.com/api5?query=' + terjemahan.toString());
+      var decoded = jsonDecode(data);
+      setState(() {
+        output = decoded['output'];
+      });
     });
   }
   // batas
@@ -118,6 +124,10 @@ class _IndoBanjarBetulState extends State<IndoBanjarBetul> {
                     MaterialPageRoute(builder: (context) => BanjarInggris()),
                   );
                   break;
+                case IconsMenu.homee:
+                  Navigator.of(context).push(
+                    MaterialPageRoute(builder: (context) => HomeView()),
+                  );
               }
             },
             itemBuilder: (context) => IconsMenu.items
@@ -168,11 +178,14 @@ class _IndoBanjarBetulState extends State<IndoBanjarBetul> {
                   color: Colors.white,
                 ),
                 onPressed: () async {
-                  data = await fetchdata(url);
-                  var decoded = jsonDecode(data);
-                  setState(() {
-                    output = decoded['output'];
-                  });
+                  if (_textEditingController.text == "") {
+                  } else {
+                    data = await fetchdata(url);
+                    var decoded = jsonDecode(data);
+                    setState(() {
+                      output = decoded['output'];
+                    });
+                  }
                 },
               )
             ],
@@ -210,7 +223,8 @@ class IconsMenu {
     Banjar,
     Idbanjar,
     Inggris,
-    Idinggris
+    Idinggris,
+    homee
   ];
 
   static const bookmark = IconMenu(
@@ -236,6 +250,10 @@ class IconsMenu {
   static const Idinggris = IconMenu(
     text: 'Banjarese -> Inggris',
     icon: Icons.flag,
+  );
+  static const homee = IconMenu(
+    text: 'Kembali ke Beranda',
+    icon: Icons.arrow_back,
   );
 }
 

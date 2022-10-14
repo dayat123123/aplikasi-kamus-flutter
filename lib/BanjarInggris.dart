@@ -1,3 +1,5 @@
+// ignore_for_file: unused_import, file_names, prefer_final_fields, unused_field, unnecessary_const, unnecessary_string_interpolations, constant_identifier_names
+
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
@@ -11,6 +13,8 @@ import 'package:kamus_banjar/main.dart';
 import 'package:kamus_banjar/function.dart';
 import 'package:speech_to_text/speech_recognition_result.dart';
 import 'package:speech_to_text/speech_to_text.dart';
+
+import 'app/modules/home/views/home_view.dart';
 
 class BanjarInggris extends StatefulWidget {
   const BanjarInggris({Key? key}) : super(key: key);
@@ -52,11 +56,15 @@ class _BanjarInggrisState extends State<BanjarInggris> {
   }
 
   void _onSpeechResult(SpeechRecognitionResult result) {
-    setState(() {
+    setState(() async {
       _textEditingController.text = result.recognizedWords;
       terjemahan = _textEditingController.text;
-      fetchdata(url =
+      data = await fetchdata(url =
           'https://vnev.herokuapp.com/api7?query=' + terjemahan.toString());
+      var decoded = jsonDecode(data);
+      setState(() {
+        output = decoded['output'];
+      });
     });
   }
   // batas
@@ -64,7 +72,7 @@ class _BanjarInggrisState extends State<BanjarInggris> {
   OutlineInputBorder _inputformdeco() {
     return OutlineInputBorder(
       borderRadius: BorderRadius.circular(20.0),
-      borderSide: BorderSide(
+      borderSide: const BorderSide(
           width: 1.0,
           color: Color.fromARGB(255, 86, 87, 88),
           style: BorderStyle.solid),
@@ -75,11 +83,11 @@ class _BanjarInggrisState extends State<BanjarInggris> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Color.fromARGB(255, 39, 35, 35),
+        backgroundColor: const Color.fromARGB(255, 39, 35, 35),
         automaticallyImplyLeading: false,
-        title: Text(
+        title: const Text(
           "Banjarese ➨ Inggris",
-          style: TextStyle(color: Colors.white),
+          style: const TextStyle(color: Colors.white),
         ),
         actions: [
           PopupMenuButton<IconMenu>(
@@ -90,34 +98,43 @@ class _BanjarInggrisState extends State<BanjarInggris> {
               switch (value) {
                 case IconsMenu.bookmark:
                   Navigator.of(context).push(
-                    MaterialPageRoute(builder: (context) => IndoInggris()),
+                    MaterialPageRoute(
+                        builder: (context) => const IndoInggris()),
                   );
                   break;
                 case IconsMenu.Register:
                   Navigator.of(context).push(
-                    MaterialPageRoute(builder: (context) => InggrisIndo()),
+                    MaterialPageRoute(
+                        builder: (context) => const InggrisIndo()),
                   );
                   break;
                 case IconsMenu.Banjar:
                   Navigator.of(context).push(
-                    MaterialPageRoute(builder: (context) => IndoBanjar()),
+                    MaterialPageRoute(builder: (context) => const IndoBanjar()),
                   );
                   break;
                 case IconsMenu.Idbanjar:
                   Navigator.of(context).push(
-                    MaterialPageRoute(builder: (context) => IndoBanjarBetul()),
+                    MaterialPageRoute(
+                        builder: (context) => const IndoBanjarBetul()),
                   );
                   break;
                 case IconsMenu.Inggris:
                   Navigator.of(context).push(
-                    MaterialPageRoute(builder: (context) => InggrisBanjar()),
+                    MaterialPageRoute(
+                        builder: (context) => const InggrisBanjar()),
                   );
                   break;
                 case IconsMenu.Idinggris:
                   Navigator.of(context).push(
-                    MaterialPageRoute(builder: (context) => BanjarInggris()),
+                    MaterialPageRoute(
+                        builder: (context) => const BanjarInggris()),
                   );
                   break;
+                case IconsMenu.homee:
+                  Navigator.of(context).push(
+                    MaterialPageRoute(builder: (context) => HomeView()),
+                  );
               }
             },
             itemBuilder: (context) => IconsMenu.items
@@ -134,7 +151,7 @@ class _BanjarInggrisState extends State<BanjarInggris> {
         ],
         centerTitle: true,
         bottom: PreferredSize(
-          preferredSize: Size.fromHeight(45),
+          preferredSize: const Size.fromHeight(45),
           child: Row(
             children: [
               Expanded(
@@ -163,16 +180,19 @@ class _BanjarInggrisState extends State<BanjarInggris> {
                 ),
               ),
               IconButton(
-                icon: Icon(
+                icon: const Icon(
                   Icons.search,
                   color: Colors.white,
                 ),
                 onPressed: () async {
-                  data = await fetchdata(url);
-                  var decoded = jsonDecode(data);
-                  setState(() {
-                    output = decoded['output'];
-                  });
+                  if (_textEditingController.text == "") {
+                  } else {
+                    data = await fetchdata(url);
+                    var decoded = jsonDecode(data);
+                    setState(() {
+                      output = decoded['output'];
+                    });
+                  }
                 },
               )
             ],
@@ -180,15 +200,15 @@ class _BanjarInggrisState extends State<BanjarInggris> {
         ),
       ),
       body: Container(
-          margin: EdgeInsets.only(left: 30),
+          margin: const EdgeInsets.only(left: 30),
           child: ListView(
             children: [
-              SizedBox(
+              const SizedBox(
                 height: 15,
               ),
               Text(
                 "$output",
-                style: TextStyle(fontSize: 18),
+                style: const TextStyle(fontSize: 18),
               ),
             ],
           )),
@@ -210,7 +230,8 @@ class IconsMenu {
     Banjar,
     Idbanjar,
     Inggris,
-    Idinggris
+    Idinggris,
+    homee
   ];
 
   static const bookmark = IconMenu(
@@ -236,6 +257,10 @@ class IconsMenu {
   static const Idinggris = IconMenu(
     text: 'Banjarese -> Inggris',
     icon: Icons.flag,
+  );
+  static const homee = IconMenu(
+    text: 'Kembali ke Beranda',
+    icon: Icons.arrow_back,
   );
 }
 
