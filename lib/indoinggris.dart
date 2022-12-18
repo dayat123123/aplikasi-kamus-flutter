@@ -1,3 +1,5 @@
+// ignore_for_file: constant_identifier_names, unnecessary_string_interpolations, prefer_final_fields
+
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:kamus_banjar/app/modules/home/views/home_view.dart';
@@ -12,6 +14,9 @@ import 'package:kamus_banjar/main.dart';
 import 'package:kamus_banjar/function.dart';
 import 'package:speech_to_text/speech_recognition_result.dart';
 import 'package:speech_to_text/speech_to_text.dart';
+import 'dart:io';
+import 'dart:async';
+import 'package:http/io_client.dart';
 
 class IndoInggris extends StatefulWidget {
   const IndoInggris({Key? key}) : super(key: key);
@@ -21,6 +26,8 @@ class IndoInggris extends StatefulWidget {
 }
 
 class _IndoInggrisState extends State<IndoInggris> {
+  HttpClient client = new HttpClient();
+
   late TextEditingController _textEditingController;
   String url = '';
   var data;
@@ -60,7 +67,8 @@ class _IndoInggrisState extends State<IndoInggris> {
       // fetchdata(url =
       //     'https://vnev.herokuapp.com/api2?query=' + terjemahan.toString());
       data = await fetchdata(url =
-          'https://vnev.herokuapp.com/api2?query=' + terjemahan.toString());
+          'https://flask-production-b796.up.railway.app/api1?query=' +
+              terjemahan.toString());
       var decoded = jsonDecode(data);
       setState(() {
         output = decoded['output'];
@@ -87,7 +95,7 @@ class _IndoInggrisState extends State<IndoInggris> {
         automaticallyImplyLeading: false,
         title: const Text(
           "Indonesia ➨ Inggris",
-          style: TextStyle(color: Colors.white),
+          style: TextStyle(color: Colors.white, fontSize: 25),
         ),
         actions: [
           PopupMenuButton<IconMenu>(
@@ -152,7 +160,7 @@ class _IndoInggrisState extends State<IndoInggris> {
         ],
         centerTitle: true,
         bottom: PreferredSize(
-          preferredSize: const Size.fromHeight(45),
+          preferredSize: const Size.fromHeight(65),
           child: Row(
             children: [
               Expanded(
@@ -164,8 +172,9 @@ class _IndoInggrisState extends State<IndoInggris> {
                   child: Form(
                     child: TextFormField(
                       onChanged: (value) {
-                        url = 'https://vnev.herokuapp.com/api2?query=' +
-                            value.toString();
+                        url =
+                            'https://flask-production-b796.up.railway.app/api1?query=' +
+                                value.toString();
                       },
                       controller: _textEditingController,
                       decoration: InputDecoration(
@@ -207,10 +216,16 @@ class _IndoInggrisState extends State<IndoInggris> {
               const SizedBox(
                 height: 15,
               ),
-              Text(
-                "$output",
-                style: const TextStyle(fontSize: 23),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 3, vertical: 3),
+                child: Text(
+                  "$output",
+                  style: const TextStyle(fontSize: 23),
+                ),
               ),
+              Spacer(
+                flex: 10,
+              )
             ],
           )),
       floatingActionButton: FloatingActionButton(

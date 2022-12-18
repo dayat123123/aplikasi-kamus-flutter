@@ -60,7 +60,8 @@ class _BanjarInggrisState extends State<BanjarInggris> {
       _textEditingController.text = result.recognizedWords;
       terjemahan = _textEditingController.text;
       data = await fetchdata(url =
-          'https://vnev.herokuapp.com/api7?query=' + terjemahan.toString());
+          'https://flask-production-b796.up.railway.app/api6?query=' +
+              terjemahan.toString());
       var decoded = jsonDecode(data);
       setState(() {
         output = decoded['output'];
@@ -87,7 +88,7 @@ class _BanjarInggrisState extends State<BanjarInggris> {
         automaticallyImplyLeading: false,
         title: const Text(
           "Banjarese ➨ Inggris",
-          style: const TextStyle(color: Colors.white),
+          style: const TextStyle(color: Colors.white, fontSize: 25),
         ),
         actions: [
           PopupMenuButton<IconMenu>(
@@ -151,7 +152,7 @@ class _BanjarInggrisState extends State<BanjarInggris> {
         ],
         centerTitle: true,
         bottom: PreferredSize(
-          preferredSize: const Size.fromHeight(45),
+          preferredSize: const Size.fromHeight(65),
           child: Row(
             children: [
               Expanded(
@@ -163,8 +164,9 @@ class _BanjarInggrisState extends State<BanjarInggris> {
                   child: Form(
                     child: TextFormField(
                       onChanged: (value) {
-                        url = 'https://vnev.herokuapp.com/api7?query=' +
-                            value.toString();
+                        url =
+                            'https://flask-production-b796.up.railway.app/api6?query=' +
+                                value.toString();
                       },
                       controller: _textEditingController,
                       decoration: InputDecoration(
@@ -208,7 +210,7 @@ class _BanjarInggrisState extends State<BanjarInggris> {
               ),
               Text(
                 "$output",
-                style: const TextStyle(fontSize: 18),
+                style: const TextStyle(fontSize: 23),
               ),
             ],
           )),

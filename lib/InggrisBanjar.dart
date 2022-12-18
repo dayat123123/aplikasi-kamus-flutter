@@ -1,3 +1,5 @@
+// ignore_for_file: unnecessary_const, prefer_final_fields, constant_identifier_names
+
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
@@ -58,7 +60,8 @@ class _InggrisBanjarState extends State<InggrisBanjar> {
       _textEditingController.text = result.recognizedWords;
       terjemahan = _textEditingController.text;
       data = await fetchdata(url =
-          'https://vnev.herokuapp.com/api6?query=' + terjemahan.toString());
+          'https://flask-production-b796.up.railway.app/api5?query=' +
+              terjemahan.toString());
       var decoded = jsonDecode(data);
       setState(() {
         output = decoded['output'];
@@ -70,9 +73,9 @@ class _InggrisBanjarState extends State<InggrisBanjar> {
   OutlineInputBorder _inputformdeco() {
     return OutlineInputBorder(
       borderRadius: BorderRadius.circular(20.0),
-      borderSide: BorderSide(
+      borderSide: const BorderSide(
           width: 1.0,
-          color: Color.fromARGB(255, 86, 87, 88),
+          color: const Color.fromARGB(255, 86, 87, 88),
           style: BorderStyle.solid),
     );
   }
@@ -81,11 +84,11 @@ class _InggrisBanjarState extends State<InggrisBanjar> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Color.fromARGB(255, 39, 35, 35),
+        backgroundColor: const Color.fromARGB(255, 39, 35, 35),
         automaticallyImplyLeading: false,
-        title: Text(
+        title: const Text(
           "Inggris ➨ Banjarese",
-          style: TextStyle(color: Colors.white),
+          style: TextStyle(color: Colors.white, fontSize: 25),
         ),
         actions: [
           PopupMenuButton<IconMenu>(
@@ -96,32 +99,37 @@ class _InggrisBanjarState extends State<InggrisBanjar> {
               switch (value) {
                 case IconsMenu.bookmark:
                   Navigator.of(context).push(
-                    MaterialPageRoute(builder: (context) => IndoInggris()),
+                    MaterialPageRoute(
+                        builder: (context) => const IndoInggris()),
                   );
                   break;
                 case IconsMenu.Register:
                   Navigator.of(context).push(
-                    MaterialPageRoute(builder: (context) => InggrisIndo()),
+                    MaterialPageRoute(
+                        builder: (context) => const InggrisIndo()),
                   );
                   break;
                 case IconsMenu.Banjar:
                   Navigator.of(context).push(
-                    MaterialPageRoute(builder: (context) => IndoBanjar()),
+                    MaterialPageRoute(builder: (context) => const IndoBanjar()),
                   );
                   break;
                 case IconsMenu.Idbanjar:
                   Navigator.of(context).push(
-                    MaterialPageRoute(builder: (context) => IndoBanjarBetul()),
+                    MaterialPageRoute(
+                        builder: (context) => const IndoBanjarBetul()),
                   );
                   break;
                 case IconsMenu.Inggris:
                   Navigator.of(context).push(
-                    MaterialPageRoute(builder: (context) => InggrisBanjar()),
+                    MaterialPageRoute(
+                        builder: (context) => const InggrisBanjar()),
                   );
                   break;
                 case IconsMenu.Idinggris:
                   Navigator.of(context).push(
-                    MaterialPageRoute(builder: (context) => BanjarInggris()),
+                    MaterialPageRoute(
+                        builder: (context) => const BanjarInggris()),
                   );
                   break;
                 case IconsMenu.homee:
@@ -144,7 +152,7 @@ class _InggrisBanjarState extends State<InggrisBanjar> {
         ],
         centerTitle: true,
         bottom: PreferredSize(
-          preferredSize: Size.fromHeight(45),
+          preferredSize: const Size.fromHeight(65),
           child: Row(
             children: [
               Expanded(
@@ -156,8 +164,9 @@ class _InggrisBanjarState extends State<InggrisBanjar> {
                   child: Form(
                     child: TextFormField(
                       onChanged: (value) {
-                        url = 'https://vnev.herokuapp.com/api6?query=' +
-                            value.toString();
+                        url =
+                            'https://flask-production-b796.up.railway.app/api5?query=' +
+                                value.toString();
                       },
                       controller: _textEditingController,
                       decoration: InputDecoration(
@@ -173,7 +182,7 @@ class _InggrisBanjarState extends State<InggrisBanjar> {
                 ),
               ),
               IconButton(
-                icon: Icon(
+                icon: const Icon(
                   Icons.search,
                   color: Colors.white,
                 ),
@@ -193,15 +202,15 @@ class _InggrisBanjarState extends State<InggrisBanjar> {
         ),
       ),
       body: Container(
-          margin: EdgeInsets.only(left: 30),
+          margin: const EdgeInsets.only(left: 30),
           child: ListView(
             children: [
-              SizedBox(
+              const SizedBox(
                 height: 15,
               ),
               Text(
                 "$output",
-                style: TextStyle(fontSize: 18),
+                style: const TextStyle(fontSize: 23),
               ),
             ],
           )),
